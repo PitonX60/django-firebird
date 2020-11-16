@@ -114,6 +114,10 @@ class DatabaseIntrospection(BaseDatabaseIntrospection):
             items.append(FieldInfo(r[0], r[1], r[2], r[2] or 0, r[3], r[4], not (r[5] == 1), r[6]))
         return items
 
+    def identifier_converter(self, name):
+        """Identifier comparison is case insensitive under Firebird."""
+        return name.upper()
+
     def get_sequences(self, cursor, table_name, table_fields=()):
         """
         Return sequences for table.
